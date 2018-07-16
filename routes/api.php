@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 //});
 
 
-Route::get('discounts/show','CalculateDiscountsController@showMessage');
+Route::get('discounts/show','CalculateDiscountController@calculateDiscounts');
 
 //route::get('discounts/json', function(){
 //$Order = \App\OrderModel::get()->toJson();

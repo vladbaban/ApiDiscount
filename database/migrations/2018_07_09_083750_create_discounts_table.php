@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAndEditDiscountsMigrationFile extends Migration
+class CreateDiscountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,14 @@ class CreateAndEditDiscountsMigrationFile extends Migration
     //defining the table structure
     public function up()
     {
-        Schema::create('Discounts', function(Blueprint $table) {
-                $table->increments('Id');
-                $table->string('Description');
-                $table->string('Type');
-                $table->string('DiscountAplicationRules');
-                $table->integer('DiscountValues');
+        Schema::create('discounts', function(Blueprint $table) {
+                $table->increments('id');
+                $table->string('description');
+                $table->integer('value');
+                $table->float('limit');
+                $table->boolean('percentage');
                 $table->timestamps();
-        });
+        }); 
     }
 
     /**
@@ -31,6 +31,6 @@ class CreateAndEditDiscountsMigrationFile extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('Discounts');
+         Schema::dropIfExists('discounts');
     }
 }
