@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Discount;
+use App\DiscountRule;
 
 class DiscountSeeder extends Seeder
 {
@@ -12,20 +12,29 @@ class DiscountSeeder extends Seeder
      */
     public function run()
     {
-       Discount::create([
-       		
-       		'description' =>'OrderPercent',
-       		'percentage'=>true,       		
-       		'value'=>'10',
-          'limit'=>'1000'
-       	]);
+        DiscountRule::truncate();
 
-        Discount::create([
-       		
-       		'description' =>'QuantityOfProduct',
-       		'percentage'=>false,
-          'value'=>'5',
-          'limit'=>'5'
-       	]);
+        DiscountRule::create([
+            'description' => 'DiscountReceivePriceReductionForCheepestProductOutOfTwoOrMoreItemsOfACertainCategory',
+            'percentage' => true,
+            'value' => '20',
+            'category' => 1,
+            'limit' => null
+        ]);
+
+        DiscountRule::create([
+            'description' => 'DiscountReceiveFreeProductWhenBuyingMoreThanThresholdAmount',
+            'percentage' => false,
+            'value' => '1',
+            'limit' => '5',
+            'category' => 2
+        ]);
+        DiscountRule::create([
+            'description' => 'DiscountReceiveTotalOrderPriceReductionForClientsWithPreviosOrdersValueOverThreshold',
+            'percentage' => true,
+            'value' => '10',
+            'limit' => '1000',
+            'category' => null
+        ]);
     }
 }

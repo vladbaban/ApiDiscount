@@ -2,8 +2,9 @@
 namespace App\DiscountServices;
 
 
-interface  IDiscount{
-	public function compute($orderinput);
+interface  IDiscount
+{
+	public function compute($orderInput,$description);
 }
 
 ?>

@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\DiscountRule;
 use Illuminate\Http\Request;
-use App\DiscountServices\DiscoutDependantOnQuantityAndCategory_AddingToQuantityEfect;
+
 
 class CalculateDiscountController extends Controller
 {
-    
-
  public function calculateDiscounts(Request $request)
     {
-    $discount = new DiscoutDependantOnQuantityAndCategory_AddingToQuantityEfect();
-    $order= $request->all();
+  	$discountRules=DiscountRule::all();
+  	$order= $request->all();
+	   $discounts = [];
+  		foreach($discountRules as $rule)
+  		{
+  			$discountManager = app()->make($rule->description);
+  			$discounts[$rule->description] = $discountManager->compute($order,$rule->description);
+  		}
     
-    return $discount->compute($order);
+    return [
+            'discounts' => $discounts
+        ];
 
     }
 

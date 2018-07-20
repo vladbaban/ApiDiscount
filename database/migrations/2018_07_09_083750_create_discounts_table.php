@@ -14,11 +14,12 @@ class CreateDiscountsTable extends Migration
     //defining the table structure
     public function up()
     {
-        Schema::create('discounts', function(Blueprint $table) {
+        Schema::create('discount_rules', function(Blueprint $table) {
                 $table->increments('id');
                 $table->string('description');
                 $table->integer('value');
-                $table->float('limit');
+                $table->float('limit')->nullable();
+                $table->integer('category')->nullable();
                 $table->boolean('percentage');
                 $table->timestamps();
         }); 
@@ -31,6 +32,6 @@ class CreateDiscountsTable extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('discounts');
+         Schema::dropIfExists('discount_rules');
     }
 }
