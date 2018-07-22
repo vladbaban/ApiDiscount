@@ -20,7 +20,7 @@ class CreateDiscountsTable extends Migration
                 $table->integer('value');
                 $table->float('limit')->nullable();
                 $table->integer('category')->nullable();
-                $table->boolean('percentage');
+                $table->boolean('percentage')->nullable();
                 $table->timestamps();
         }); 
     }

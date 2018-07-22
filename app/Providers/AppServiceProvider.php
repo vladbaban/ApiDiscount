@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //here we create bindins between the discount descriptions and the discount classes
         app()->singleton('DiscountReceiveFreeProductWhenBuyingMoreThanThresholdAmount', function () {
             return new DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount();
         });

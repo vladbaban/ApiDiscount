@@ -16,6 +16,8 @@ class DiscountImplementationReceiveTotalOrderPriceReductionForClientsWithPreviou
         $discountFreeProduct = new DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount();
         $user=User::select('name')->where('id', $orderInput["customer-id"])->first();
         $newTotalOrderPrice =round($discountFreeProduct->applyDiscountByModifyingPrice($orderInput["total"], $discountRules), 3);
+        // this discount function has a diferent response format
+        // because it does not apply to am item but to the entire order
         return $orderDiscount[]=
         [
         'client'=>$orderInput["customer-id"],

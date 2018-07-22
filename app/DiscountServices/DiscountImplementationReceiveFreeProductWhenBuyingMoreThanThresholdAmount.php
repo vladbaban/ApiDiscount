@@ -11,6 +11,7 @@ class DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount 
     {
         $listOfDiscounts = [];
         $discountRules =DiscountRule::where('description', $description)->first();
+            // here we check if the discount is applied to all items or to a category
         if (is_null($discountRules->category)) {
             $products = DB::table('products')->all();
         } else {
@@ -21,7 +22,7 @@ class DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount 
         return $Discounts;
     }
 
-
+    // here we decide witch result structure to use for the current discount and item
     public function calculateDiscountsForItems($itemsToApplyDiscount, $discountRules)
     {
         foreach ($itemsToApplyDiscount as $item) {
@@ -51,9 +52,7 @@ class DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount 
     }
     
 
-
-
-
+//if a discount is applyed to a certain category we can use this function to return all items of that category
     public function getItemsByCategory($orderInput, $products)
     {
         foreach ($products as $product) {
@@ -66,7 +65,7 @@ class DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount 
         return $disountCategoryItems;
     }
 
-
+// calculates the discout if it adds to quantitiy
     public function applyDiscountByAddingToQuantity($quantity, $discountRules)
     {
         $limitBreak = floor($quantity/$discountRules->limit);
@@ -75,7 +74,7 @@ class DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount 
         return	$newQuantity;
     }
 
-
+// this fucntion calculates discounts if it reduces total price by a percent
     public function applyDiscountByModifyingPrice($total, $discountRules)
     {
         $discountQuantity = ($total*$discountRules->value)/100;
