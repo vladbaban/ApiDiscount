@@ -1,10 +1,7 @@
-<?PHP
+<?php
 namespace App\DiscountServices;
 
-
-interface  IDiscount
+interface IDiscount
 {
-	public function compute($orderInput,$description);
+    public function compute($orderInput, $description);
 }
-
-?>

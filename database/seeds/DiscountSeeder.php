@@ -30,7 +30,7 @@ class DiscountSeeder extends Seeder
             'category' => 2
         ]);
         DiscountRule::create([
-            'description' => 'DiscountReceiveTotalOrderPriceReductionForClientsWithPreviosOrdersValueOverThreshold',
+            'description' => 'DiscountReceiveTotalOrderPriceReductionForClientsWithPreviousOrdersValueOverThreshold',
             'percentage' => true,
             'value' => '10',
             'limit' => '1000',

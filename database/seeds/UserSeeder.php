@@ -13,16 +13,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-        	'name'=>'Coca Cola',
-        	'revenue'=>'492.12',
-        	]);
-         User::create([
-        	'name'=>'Teamleader',
-        	'revenue'=>'1505.95',
-        	]);
-         User::create([
-        	'name'=>'Jeroen De Wit',
-        	'revenue'=>'0.00',
-        	]); 
+            'name'=>'Coca Cola',
+            'revenue'=>'492.12',
+            ]);
+        User::create([
+            'name'=>'Teamleader',
+            'revenue'=>'1505.95',
+            ]);
+        User::create([
+            'name'=>'Jeroen De Wit',
+            'revenue'=>'0.00',
+            ]);
     }
 }

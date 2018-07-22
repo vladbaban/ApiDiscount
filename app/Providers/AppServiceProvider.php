@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Providers;
+
 use App\DiscountServices\DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount;
 use App\DiscountServices\DiscountImplementationReceivePriceReductionForCheepestProductOutOfTwoOrMoreItems;
-use App\DiscountServices\DiscountImplementationReceiveTotalOrderPriceReductionForClientsWithPreviosOrdersValueOverThreshold;
+use App\DiscountServices\DiscountImplementationReceiveTotalOrderPriceReductionForClientsWithPreviousOrdersValueOverThreshold;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\Resource;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,17 +27,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        app()->singleton('DiscountReceiveFreeProductWhenBuyingMoreThanThresholdAmount',function(){
+        app()->singleton('DiscountReceiveFreeProductWhenBuyingMoreThanThresholdAmount', function () {
             return new DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount();
         });
-        app()->singleton('DiscountReceivePriceReductionForCheepestProductOutOfTwoOrMoreItemsOfACertainCategory',function(){
+        app()->singleton('DiscountReceivePriceReductionForCheepestProductOutOfTwoOrMoreItemsOfACertainCategory', function () {
             return new DiscountImplementationReceivePriceReductionForCheepestProductOutOfTwoOrMoreItems();
         });
-        app()->singleton('DiscountReceiveTotalOrderPriceReductionForClientsWithPreviosOrdersValueOverThreshold',function(){
-            return new DiscountImplementationReceiveTotalOrderPriceReductionForClientsWithPreviosOrdersValueOverThreshold();
+        app()->singleton('DiscountReceiveTotalOrderPriceReductionForClientsWithPreviousOrdersValueOverThreshold', function () {
+            return new DiscountImplementationReceiveTotalOrderPriceReductionForClientsWithPreviousOrdersValueOverThreshold();
         });
-     
-     
     }
 }
