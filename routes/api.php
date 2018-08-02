@@ -13,15 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::get('discounts/{Description}',function($Description){
-//		return "you are a you are a ".$Description;
-//
-//});
 
 
 Route::get('discounts/show','CalculateDiscountController@calculateDiscounts');
 
-//route::get('discounts/json', function(){
-//$Order = \App\OrderModel::get()->toJson();
-//return compact('$Order');
-//});

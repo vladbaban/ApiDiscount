@@ -3,26 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\DiscountRule;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\DiscountRequest;
 
+class CalculateDiscountController extends Controller {
 
-class CalculateDiscountController extends Controller
-{
- public function calculateDiscounts(Request $request)
-    {
-  	$discountRules=DiscountRule::all();
-  	$order= $request->all();
-	   $discounts = [];
-  		foreach($discountRules as $rule)
-  		{
-  			$discountManager = app()->make($rule->description);
-  			$discounts[$rule->description] = $discountManager->compute($order,$rule->description);
-  		}
-    
-    return [
-            'discounts' => $discounts
-        ];
+	/**
+	 * @param  DiscountRequest $request
+	 * @return JsonResponse
+	 */
+	public function calculateDiscounts(DiscountRequest $request) {
 
-    }
+		$discountRules = DiscountRule::all();
+		$order = $request->all();
+		$discounts = [];
+
+		foreach ($discountRules as $rule) {
+			/**
+			 * Using laravels service provider to perform the instantiation of the
+			 * discounts based on the discounts description field
+			 * See app\Providers\AppServiceProvider for visualising class instantiation
+			 **/
+			$discountManager = app()->make($rule->description);
+			$discounts[$rule->description] = $discountManager->compute($order, $rule);
+		}
+
+		return response()->json([
+			'discounts' => $discounts,
+		]);
+	}
 
 }
