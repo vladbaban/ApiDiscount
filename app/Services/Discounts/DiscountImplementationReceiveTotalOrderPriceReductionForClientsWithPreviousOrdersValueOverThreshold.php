@@ -23,7 +23,7 @@ class DiscountImplementationReceiveTotalOrderPriceReductionForClientsWithPreviou
 		$orederDiscount = [];
 		//$databaseRulesManager = new DatabaseRulesManager();
 		$user = $this->databaseRulesManager->getUserById($orderInput["customer-id"]);
-		if ($user->revenue > 1000) {
+		if ($user->revenue > $rule->limit) {
 			$newTotalOrderPrice = round($this->applyDiscountByModifyingPrice($orderInput["total"], $rule), 3);
 
 			// this discount function has a diferent response format

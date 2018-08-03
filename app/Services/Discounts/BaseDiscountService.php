@@ -50,6 +50,7 @@ class BaseDiscountService {
 	 **/
 	public function getItemsByCategory(array $orderInput, Collection $products) {
 
+		$discountCategoryItems = [];
 		foreach ($products as $product) {
 			foreach ($orderInput["items"] as $item) {
 				if ($product->productId == $item["product-id"]) {

@@ -43,10 +43,16 @@ class DiscountImplementationReceivePriceReductionForCheapestProductOutOfTwoOrMor
 					$cheapestItem[] = $item;
 				}
 			}
-			$listOfDiscounts = $this->calculateDiscountsForItems($cheapestItem, $rule);
+			if (!empty($cheapestItem)) {
+				$listOfDiscounts = $this->calculateDiscountsForItems($cheapestItem, $rule);
 
-			return $listOfDiscounts;
+				return $listOfDiscounts;
+			} else {
+
+				return false;
+			}
 		} else {
+
 			return false;
 		}
 	}

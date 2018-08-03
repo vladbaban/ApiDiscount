@@ -3,7 +3,7 @@
 namespace App\Services\Discounts;
 
 use App\DatabaseRulesManager;
-use app\DiscountRule;
+use App\DiscountRule;
 
 class DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount extends BaseDiscountService implements IDiscount {
 
@@ -25,10 +25,20 @@ class DiscountImplementationReceiveFreeProductWhenBuyingMoreThanThresholdAmount 
 		// here we check if the discount is applied to all items or to a category
 		$products = (is_null($rule->category)) ? $this->databaseRulesManager->getAllProducts() : $this->databaseRulesManager->getProductsByCategory($rule->category);
 
-		$itemsToApplyDiscount = $this->getItemsByCategory($orderInput, $products);
-		$discounts = $this->calculateDiscountsForItems($itemsToApplyDiscount, $rule);
+		$itemsFromCategory = $this->getItemsByCategory($orderInput, $products);
 
-		return $discounts;
+		foreach ($itemsFromCategory as $item) {
+			if ($item["quantity"] >= $rule->limit) {
+				$itemsToApplyDiscount[] = $item;
+			}
+		}
+		if (!empty($itemsToApplyDiscount)) {
+			$discounts = $this->calculateDiscountsForItems($itemsToApplyDiscount, $rule);
+
+			return $discounts;
+		} else {
+			return false;
+		}
 	}
 
 }
